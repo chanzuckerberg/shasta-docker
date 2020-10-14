@@ -2,14 +2,14 @@ This repository provides an easy to use Docker image for doing _de-novo_ assembl
 ### Usage
 ```
 docker run -v `pwd`:/output \
-    <DOCKER-IMAGE> \
+    ghcr.io/chanzuckerberg/shasta:latest \
     <SHASTA-VERSION-STRING> \
     --input input.fasta
 
 OR
 
 docker run --privileged -v `pwd`:/output \
-    <DOCKER-IMAGE> \
+    ghcr.io/chanzuckerberg/shasta:latest \
     <SHASTA-VERSION-STRING> \
     --input input.fasta --memoryMode filesystem --memoryBacking 2M
 
@@ -29,7 +29,7 @@ The commands listed above assume that the reads are present in the current worki
 ```
 docker run -v `pwd`:/output \
     -v /path/to/folder/containing/reads:/reads:ro \
-    <DOCKER-IMAGE> \
+    ghcr.io/chanzuckerberg/shasta:latest \
     <SHASTA-VERSION-STRING> \
     --input /reads/input.fasta
 ```
