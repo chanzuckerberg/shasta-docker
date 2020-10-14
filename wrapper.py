@@ -125,7 +125,7 @@ def main(argv):
 
     # Run the right version of Shasta.
     print("\n\nUsing {} Shasta executable.".format(shastaBinary), flush=True)
-    print("\nRunning Shasta assembly. You can follow along by running `tail -f shasta_assembly.log` in the current working directory.\n...\n", flush=True)
+    print("\nRunning Shasta assembly. You can follow along by running `tail -f shasta_assembly.log` in the output directory.\n...\n", flush=True)
     shastaLogFile = open('shasta_assembly.log', 'w')
     shastaCmdArr = [shastaBinary] + shastaArgs
     subprocess.run(
@@ -135,7 +135,7 @@ def main(argv):
     )
     shastaLogFile.close()
     
-    print("\n\nAssembly is complete. Check the assembly directory for results.", flush=True)
+    print("\n\nDone. Check the assembly directory for results.", flush=True)
     return
 
 
