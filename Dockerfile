@@ -18,5 +18,5 @@ RUN bash -e /opt/downloadReleases.sh
 # setup entrypoint
 COPY wrapper.py /opt/wrapper.py
 
-WORKDIR /data
+WORKDIR /output
 ENTRYPOINT ["python3", "/opt/wrapper.py"]

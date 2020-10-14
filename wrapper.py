@@ -7,12 +7,16 @@ import time
 
 helpMessage = """
 Usage:
-    docker run -v `pwd`:/data <DOCKER-IMAGE> <SHASTA-VERSION-STRING> \\
+    docker run -v `pwd`:/output \\
+        <DOCKER-IMAGE> \\
+        <SHASTA-VERSION-STRING> \\
         --input input.fasta
 
     OR
 
-    docker run --privileged -v `pwd`:/data <DOCKER-IMAGE> <SHASTA-VERSION-STRING> \\
+    docker run --privileged -v `pwd`:/output \\
+        <DOCKER-IMAGE> \\
+        <SHASTA-VERSION-STRING> \\
         --input input.fasta --memoryMode filesystem --memoryBacking 2M
 
     Accepted values for SHASTA-VERSION-STRING are:
@@ -69,7 +73,7 @@ def main(argv):
     availableShastaReleases = ['0.6.0', '0.5.1', '0.5.0', '0.4.0', '0.3.0', '0.2.0', '0.1.0']
     shastaVersion = argv[0]
     shastaArgs = argv[1:]
-
+    
     print("Shasta Version : {}".format(shastaVersion), flush=True)
     shastaBinary = "/opt/shasta-Linux-{}".format(shastaVersion)
     
