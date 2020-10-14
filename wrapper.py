@@ -16,13 +16,13 @@ Usage:
         --input input.fasta --memoryMode filesystem --memoryBacking 2M
 
     Accepted values for SHASTA-VERSION-STRING are:
-        0.6.0         : Shasta release v0.6.0
-        0.5.1         : Shasta release v0.5.1
-        0.5.0         : Shasta release v0.5.0
-        0.4.0         : Shasta release v0.4.0
-        0.3.0         : Shasta release v0.3.0
-        0.2.0         : Shasta release v0.2.0
-        0.1.0         : Shasta release v0.1.0
+        0.6.0         : Shasta release 0.6.0
+        0.5.1         : Shasta release 0.5.1
+        0.5.0         : Shasta release 0.5.0
+        0.4.0         : Shasta release 0.4.0
+        0.3.0         : Shasta release 0.3.0
+        0.2.0         : Shasta release 0.2.0
+        0.1.0         : Shasta release 0.1.0
         latest-commit : This will download and build the current main branch of chanzuckerberg/shasta
         <COMMIT-HASH> : This will download and build the main branch of chanzuckerberg/shasta at the given commit
     
@@ -84,14 +84,14 @@ def main(argv):
         
         # Install pre-requisites
         print('Installing pre-requisites ...', flush=True)
-        logfile = open('Prerequisites-installation.log', 'w')
+        logfile = open('shasta-rerequisites-installation.log', 'w')
         subprocess.run(
             ['./scripts/InstallPrerequisites-Ubuntu.sh', '--minimal'],
             stdout=logfile,
             stderr=subprocess.STDOUT
         )
         logfile.close()
-        print('Done installing pre-requisites. Check Prequisites-installation.log file for details.', flush=True)
+        print('Done installing pre-requisites. Check shasta-prequisites-installation.log file for details.', flush=True)
 
         pullLatest()
 
@@ -121,8 +121,15 @@ def main(argv):
 
     # Run the right version of Shasta.
     print("\n\nUsing {} Shasta executable.".format(shastaBinary), flush=True)
+    print("\nRunning Shasta assembly. You can follow along by running `tail -f shasta_assembly.log` in the current working directory.\n...\n", flush=True)
+    shastaLogFile = open('shasta_assembly.log', 'w')
     shastaCmdArr = [shastaBinary] + shastaArgs
-    subprocess.run(shastaCmdArr)
+    subprocess.run(
+        shastaCmdArr,
+        stdout=shastaLogFile,
+        stderr=subprocess.STDOUT
+    )
+    shastaLogFile.close()
     
     print("\n\nAssembly is complete. Check the assembly directory for results.", flush=True)
     return
