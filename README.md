@@ -22,6 +22,8 @@ OR
 docker run ghcr.io/chanzuckerberg/shasta-arm64v8:latest --help
 ```
 #### Examples
+The following examples assume that you're on the `x86_64 (amd64)` platform. If you're on the `arm64v8 (aarch64)` platform, replace `ghcr.io/chanzuckerberg/shasta:latest` with `ghcr.io/chanzuckerberg/shasta-arm64v8:latest`, in the following examples.
+
 1. If the reads (fasta/fastq) files are located at `/path/to/folder/containing/reads` and you would like the Assembly Directory be created in the current working directory, then
 ```
 docker run -u `id -u`:`id -g` \
@@ -53,6 +55,8 @@ docker run -u `id -u`:`id -g` \
     --MinHash.minBucketSize 13 \
     --assemblyDirectory ShastaRunInDocker
 ```
+
+> Passing the `user:group` of the user running the Docker command with the `-u` flag will result in the Assembly Directory being owned by that user. Otherwise, the Assembly Directory will be owned by `root`. 
 
 Detailed information about running a Shasta assembly can be found at https://chanzuckerberg.github.io/shasta/Running.html. 
 
