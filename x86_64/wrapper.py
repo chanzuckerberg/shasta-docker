@@ -15,7 +15,7 @@ Usage:
 
     OR
 
-    docker run --privileged -u `id -u`:`id -g` \\
+    docker run --privileged \\
         -v `pwd`:/output \\
         <DOCKER-IMAGE> \\
         <SHASTA-VERSION-STRING> \\

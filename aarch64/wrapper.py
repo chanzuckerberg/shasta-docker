@@ -76,7 +76,7 @@ def main(argv):
     shastaArgs = argv[1:]
     
     print("Shasta Version : {}".format(shastaVersion), flush=True)
-    shastaBinary = "/opt/shasta-Linux-{}".format(shastaVersion)
+    shastaBinary = "/opt/shasta-Linux-ARM-{}".format(shastaVersion)
     
     if shastaVersion not in availableShastaReleases:
         if releaseTagIsValid(shastaVersion):
