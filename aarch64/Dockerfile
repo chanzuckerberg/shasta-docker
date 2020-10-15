@@ -12,11 +12,12 @@ RUN apt-get update && \
 
 # Download Shasta releases.
 WORKDIR /opt
-COPY downloadReleases.sh /opt/downloadReleases.sh
-RUN bash -e /opt/downloadReleases.sh
+COPY downloadAndInstall.sh /opt/downloadAndInstall.sh
+RUN bash -e /opt/downloadAndInstall.sh
 
 # setup entrypoint
 COPY wrapper.py /opt/wrapper.py
 
 WORKDIR /output
 ENTRYPOINT ["python3", "/opt/wrapper.py"]
+

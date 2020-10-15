@@ -11,3 +11,12 @@ do
     	echo "Done downloading $EXECUTABLE."    
     fi
 done
+
+echo "Installing Pre-requisites."
+curl -O -L https://raw.githubusercontent.com/chanzuckerberg/shasta/master/scripts/InstallPrerequisites-Ubuntu.sh
+chmod ugo+x InstallPrerequisites-Ubuntu.sh
+./InstallPrerequisites-Ubuntu.sh --minimal
+
+apt-get clean
+apt-get purge
+rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*

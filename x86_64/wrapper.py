@@ -7,14 +7,16 @@ import time
 
 helpMessage = """
 Usage:
-    docker run -v `pwd`:/output \\
+    docker run -u `id -u`:`id -g` \\
+        -v `pwd`:/output \\
         <DOCKER-IMAGE> \\
         <SHASTA-VERSION-STRING> \\
         --input input.fasta
 
     OR
 
-    docker run --privileged -v `pwd`:/output \\
+    docker run --privileged -u `id -u`:`id -g` \\
+        -v `pwd`:/output \\
         <DOCKER-IMAGE> \\
         <SHASTA-VERSION-STRING> \\
         --input input.fasta --memoryMode filesystem --memoryBacking 2M
@@ -91,21 +93,10 @@ def main(argv):
 
         # shastaVersion could be a commit-hash or 'latest-commit'
         print("Downloading and building Shasta code at the requested commit.", flush=True)
-        os.chdir('/opt')
+        os.chdir('/tmp')
         clone()
-        os.chdir('/opt/shasta')
+        os.chdir('/tmp/shasta')
         
-        # Install pre-requisites
-        print('Installing pre-requisites ...', flush=True)
-        logfile = open('shasta-rerequisites-installation.log', 'w')
-        subprocess.run(
-            ['./scripts/InstallPrerequisites-Ubuntu.sh', '--minimal'],
-            stdout=logfile,
-            stderr=subprocess.STDOUT
-        )
-        logfile.close()
-        print('Done installing pre-requisites. Check shasta-prequisites-installation.log file for details.', flush=True)
-
         pullLatest()
 
         shastaVersion = getValidCommitHash(shastaVersion)
@@ -113,8 +104,8 @@ def main(argv):
         
         subprocess.check_call(['git', 'checkout', shastaVersion])
     
-        subprocess.run(['mkdir', '-p', '/opt/shasta-build'])
-        os.chdir('/opt/shasta-build')
+        subprocess.run(['mkdir', '-p', '/tmp/shasta-build'])
+        os.chdir('/tmp/shasta-build')
         
         print('Configuring & Building Shasta ...', flush=True)
         cmakeCmd = subprocess.run(
@@ -125,7 +116,7 @@ def main(argv):
         
         print('Done building Shasta', flush=True)
 
-        subprocess.run(['cp', './shasta-install/bin/shasta', shastaBinary])
+        shastaBinary = "/tmp/shasta-build/shasta-install/bin/shasta"
         
         # Go back to the original working directory.
         os.chdir(cwd)
@@ -144,6 +135,13 @@ def main(argv):
     )
     shastaLogFile.close()
     
+    shastaAssemblyDirectory = "ShastaRun"
+    if "--assemblyDirectory" in shastaArgs:
+        idx = shastaArgs.index("--assemblyDirectory")
+        shastaAssemblyDirectory = shastaArgs[idx + 1]
+
+    subprocess.run(['cp', 'shasta_assembly.log', shastaAssemblyDirectory])
+
     print("\n\nDone. Check the assembly directory for results.", flush=True)
     return
 
