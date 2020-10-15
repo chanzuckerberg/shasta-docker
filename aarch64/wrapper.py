@@ -59,6 +59,11 @@ def getValidCommitHash(commitHash):
     return commitHash
 
 
+def releaseTagIsValid(releaseTag):
+    # Shasta uses semantic versioning.
+    return 2 == releaseTag.count('.')
+
+
 def main(argv):
     if 'help' in argv or '--help' in argv:
         usage()
@@ -72,6 +77,11 @@ def main(argv):
     shastaBinary = "/opt/shasta-Linux-{}".format(shastaVersion)
     
     if shastaVersion not in availableShastaReleases:
+        if releaseTagIsValid(shastaVersion):
+            # Unavailable release tag was specified. shastaVersion is not latest-commit or a valid commit hash.
+            print("Shasta version {} is not available on this platform. Run the command with `--help` to see available options.".format(shastaVersion))
+            sys.exit(2)
+
         cwd = os.getcwd()
 
         # shastaVersion could be a commit-hash or 'latest-commit'
