@@ -24,7 +24,8 @@ docker run ghcr.io/chanzuckerberg/shasta-arm64v8:latest --help
 #### Examples
 1. If the reads (fasta/fastq) files are located at `/path/to/folder/containing/reads` and you would like the Assembly Directory be created in the current working directory, then
 ```
-docker run -v `pwd`:/output \
+docker run -u `id -u`:`id -g` \
+    -v `pwd`:/output \
     -v /path/to/folder/containing/reads:/reads:ro \
     ghcr.io/chanzuckerberg/shasta:latest \
     <SHASTA-VERSION-STRING> \
@@ -32,7 +33,8 @@ docker run -v `pwd`:/output \
 ```
 2. If you would also like to provide a Shasta `conf` file, located in the current working directory, then
 ```
-docker run -v `pwd`:/output \
+docker run -u `id -u`:`id -g` \
+    -v `pwd`:/output \
     -v /path/to/folder/containing/reads:/reads:ro \
     ghcr.io/chanzuckerberg/shasta:latest \
     <SHASTA-VERSION-STRING> \
@@ -41,7 +43,8 @@ docker run -v `pwd`:/output \
 ```
 3. If you would also like to override specific configuration parameters, then
 ```
-docker run -v `pwd`:/output \
+docker run -u `id -u`:`id -g` \
+    -v `pwd`:/output \
     -v /path/to/folder/containing/reads:/reads:ro \
     ghcr.io/chanzuckerberg/shasta:latest \
     <SHASTA-VERSION-STRING> \
@@ -57,7 +60,8 @@ Detailed information about running a Shasta assembly can be found at https://cha
 Optimal Shasta performance can be achieved by using `--memoryMode filesystem --memoryBacking 2M`. However, this requires the `--privileged` flag, as shown below
 
 ```
-docker run --privileged -v `pwd`:/output \
+docker run --privileged -u `id -u`:`id -g` \
+    -v `pwd`:/output \
     ghcr.io/chanzuckerberg/shasta:latest \
     <SHASTA-VERSION-STRING> \
     --input input.fasta --memoryMode filesystem --memoryBacking 2M
