@@ -1,5 +1,12 @@
-This repository provides an easy to use Docker image for doing _de-novo_ assembly using Shasta.
-### Usage
+Docker images for doing _de-novo_ assembly using Shasta.
+
+### How to install Docker?
+Docker can be installed on most platforms. Detailed instructions available at https://docs.docker.com/engine/install/
+
+### How to manage Docker as a non-root user in Linux?
+https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user
+
+### How to use the Shasta Docker images?
 ```
 docker run -v `pwd`:/output \
     ghcr.io/chanzuckerberg/shasta:latest \
