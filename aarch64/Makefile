@@ -1,4 +1,4 @@
-image_name = chanzuckerberg/shasta
+image_name = chanzuckerberg/shasta-arm64v8
 shasta_version = 1
 tag = ${shasta_version}
 
