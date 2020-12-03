@@ -5,7 +5,9 @@ New Docker images need to be created after every Shasta release.
 
 2. [Optional, but recommended] Set up Docker to be managed as a non-root user by following instructions at https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user. If you do this step, you won't need to prefix docker commands with `sudo`.
 
-3. Create a Github personal access token using instructions at https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/creating-a-personal-access-token. The personal access token must have necessary permissions granted to it, specificially `delete:packages`, `write:packages`, `repo` & `workflow`. The token also needs to be authorized for accessing `chanzuckerberg` org in Github. 
+3. Create a Github personal access token using instructions at https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/creating-a-personal-access-token. The personal access token must have necessary permissions granted to it, specificially `delete:packages`, `write:packages`, `repo` & `workflow`. The token also needs to be authorized for accessing `chanzuckerberg` org in Github.
+
+4. Ensure that you have `Write` permission granted at https://github.com/orgs/chanzuckerberg/packages/container/shasta/settings 
 
 ### Prepare to create new images
 1. Clone the repository by running `git clone https://github.com/chanzuckerberg/shasta-docker`
