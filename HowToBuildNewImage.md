@@ -12,7 +12,7 @@ New Docker images need to be created after every Shasta release.
 
 2. Edit `shasta-docker/x86_64/wrapper.py` & `shasta-docker/aarch64/wrapper.py` to add the new Shasta release version number (at two places in each file).
 
-3. Edit `shasta-docker/x86_64/Makefile` & `shasta-docker/aarch64/Makefile` to bump the `shasta_version` to the next integer. This is the docker image/package veresion and is unrelated to the Shasta version.
+3. Edit `shasta-docker/x86_64/Makefile` & `shasta-docker/aarch64/Makefile` to bump the `shasta_version` to the next integer. This is the docker image/package version and is unrelated to the Shasta version.
 
 4. Commit the changes and push them upstream.
 
