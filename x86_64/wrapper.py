@@ -22,6 +22,7 @@ Usage:
         --input input.fasta --memoryMode filesystem --memoryBacking 2M
 
     Accepted values for SHASTA-VERSION-STRING are:
+        0.7.0         : Shasta release 0.7.0
         0.6.0         : Shasta release 0.6.0
         0.5.1         : Shasta release 0.5.1
         0.5.0         : Shasta release 0.5.0
@@ -77,7 +78,7 @@ def main(argv):
         usage()
         sys.exit(1)
 
-    availableShastaReleases = ['0.6.0', '0.5.1', '0.5.0', '0.4.0', '0.3.0', '0.2.0', '0.1.0']
+    availableShastaReleases = ['0.7.0', '0.6.0', '0.5.1', '0.5.0', '0.4.0', '0.3.0', '0.2.0', '0.1.0']
     shastaVersion = argv[0]
     shastaArgs = argv[1:]
     

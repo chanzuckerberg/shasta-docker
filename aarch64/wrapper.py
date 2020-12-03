@@ -22,6 +22,7 @@ Usage:
         --input input.fasta --memoryMode filesystem --memoryBacking 2M
 
     Accepted values for SHASTA-VERSION-STRING are:
+        0.7.0         : Shasta release 0.7.0
         0.6.0         : Shasta release 0.6.0
         latest-commit : This will download and build the current main branch of chanzuckerberg/shasta
         <COMMIT-HASH> : This will download and build the main branch of chanzuckerberg/shasta at the given commit
@@ -71,7 +72,7 @@ def main(argv):
         usage()
         sys.exit(1)
 
-    availableShastaReleases = ['0.6.0']
+    availableShastaReleases = ['0.7.0', '0.6.0']
     shastaVersion = argv[0]
     shastaArgs = argv[1:]
     
