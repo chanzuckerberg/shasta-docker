@@ -1,5 +1,5 @@
 image_name = chanzuckerberg/shasta
-shasta_version = 3
+shasta_version = 4
 tag = ${shasta_version}
 
 # Steps
