@@ -130,11 +130,11 @@ def main(argv):
     print("\nRunning Shasta assembly. You can follow along by running `tail -f shasta_assembly.log` in the output directory.\n...\n", flush=True)
     shastaLogFile = open('shasta_assembly.log', 'w')
     shastaCmdArr = [shastaBinary] + shastaArgs
-    subprocess.run(
+    shastaReturncode = subprocess.run(
         shastaCmdArr,
         stdout=shastaLogFile,
         stderr=subprocess.STDOUT
-    )
+    ).returncode
     shastaLogFile.close()
     
     shastaAssemblyDirectory = "ShastaRun"
@@ -145,8 +145,8 @@ def main(argv):
     subprocess.run(['cp', 'shasta_assembly.log', shastaAssemblyDirectory])
 
     print("\n\nDone. Check the assembly directory for results.", flush=True)
-    return
+    return shastaReturncode
 
 
 if __name__ == '__main__':
-    main(sys.argv[1:])    
+    sys.exit(main(sys.argv[1:]))
