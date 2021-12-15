@@ -1,5 +1,5 @@
 image_name = chanzuckerberg/shasta-arm64v8
-shasta_version = 3
+shasta_version = 5
 tag = ${shasta_version}
 
 # Steps
