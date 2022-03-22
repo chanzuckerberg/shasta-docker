@@ -1,5 +1,6 @@
 FROM ubuntu:20.04
-MAINTAINER Bhal Agashe, bagashe@chanzuckerberg.com
+LABEL org.opencontainers.image.authors="bruce@chanzuckerberg.com"
+LABEL org.opencontainers.image.source https://github.com/chanzuckerberg/shasta-docker
 
 ARG DEBIAN_FRONTEND=noninteractive
 ENV TZ=US/Los_Angeles
