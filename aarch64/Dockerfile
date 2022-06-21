@@ -1,4 +1,4 @@
-FROM arm64v8/ubuntu:20.04
+FROM arm64v8/ubuntu:22.04
 LABEL org.opencontainers.image.authors="bruce@chanzuckerberg.com"
 LABEL org.opencontainers.image.source https://github.com/chanzuckerberg/shasta-docker
 
