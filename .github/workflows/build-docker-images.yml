@@ -2,8 +2,6 @@ name: buildx
 
 on:
   push:
-    branches:
-    - test-gha # to be deleted after test
     tags:
     - "*"
   schedule:
