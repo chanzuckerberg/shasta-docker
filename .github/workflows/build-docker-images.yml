@@ -34,7 +34,9 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
       - name: Build and push image
-        run: docker buildx build --push \
-             --tag ghcr.io/chanzuckerberg/shasta:{SHASTA_VERSION:-latest} \
-             --platform linux/amd64,linux/arm64 \
-             .
+        run: |
+          docker buildx build
+          --push
+          --tag ghcr.io/chanzuckerberg/shasta:{SHASTA_VERSION:-latest}
+          --platform linux/amd64,linux/arm64
+          .
