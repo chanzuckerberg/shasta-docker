@@ -3,28 +3,26 @@ LABEL org.opencontainers.image.authors="bruce@chanzuckerberg.com"
 LABEL org.opencontainers.image.source https://github.com/chanzuckerberg/shasta-docker
 
 ARG DEBIAN_FRONTEND=noninteractive
+ARG SHASTA_VERSION
+
 ENV TZ=US/Los_Angeles
 
-# Build shasta release
-ARG BUILD_ID
+# cloned shasta repo to local when building locally, this is done by github action in workflow
 WORKDIR /opt
+COPY shasta /opt/shasta
 
-RUN apt-get update && apt install -y git
-RUN git clone https://github.com/chanzuckerberg/shasta.git
-WORKDIR /opt/shasta
-RUN if [[ -z "${SHASTA_VERSION}" ]]; then \
-      git checkout tags/${BUILD_ID} -b ${BUILD_ID} \
-      BUILD_ID="Shasta Release ${SHASTA_VERSION}" ; \
-    else \
-      BUILD_ID="Shasta Nightly" ; \
-    fi
+# install prerequisite from shasta script to install build tools
 RUN /opt/shasta/scripts/InstallPrerequisites-Ubuntu.sh
-RUN mkdir shasta-build
+
+# build shasta binary
+RUN mkdir /opt/shasta-build
 WORKDIR /opt/shasta-build
-RUN cmake ../shasta -DBUILD_ID=${BUILD_ID} && \
+RUN cmake ../shasta -DBUILD_ID="Shasta Release ${SHASTA_VERSION:-Nightly}" && \
     make -j 2 all && \
-    make install/strip && \
-    mv shasta-install /opt/shasta-Ubuntu-22.04
+    make install/strip
+
+# clean up
+RUN mv shasta-install /opt/shasta-Ubuntu-22.04
 RUN rm -rf /opt/shasta /opt/shasta-build
 
 WORKDIR /opt/shasta-Ubuntu-22.04
