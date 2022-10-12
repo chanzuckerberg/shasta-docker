@@ -1,3 +1,9 @@
+**This project is abandoned.**
+
+Please refer to the [Shasta repo fork](https://github.com/paoloshasta/shasta) for software release options.
+
+---
+
 Docker images for doing _de-novo_ assembly using Shasta.
 
 ### How to install Docker?
